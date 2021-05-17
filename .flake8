@@ -1,0 +1,28 @@
+[flake8]
+
+
+ignore=
+    # Allow whitespace at the beginning and end of parentheses, brackets, and braces.
+    E201, E202, \
+
+    # Required by Black, for cases where Black isn't PEP 8 compliant. C.f.: https://black.readthedocs.io/en/stable/compatible_configs.html#flake8
+    E203, W503, \
+
+    # Black bug
+    C812, \
+
+    # Flake8 bug
+    F821, \
+
+
+per-file-ignores=
+    # Allow * imports in tests
+    */tests/*.py:F403,F405
+    utils/test_utils.py:F403,F405
+
+    # Allow * imports in settings
+    settings/*.py:F403,F405
+
+
+max-line-length=125
+exclude = .git,*migrations*,bin,lib
