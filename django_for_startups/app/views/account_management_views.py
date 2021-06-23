@@ -31,7 +31,6 @@ class User(APIView):
 
         try:
             user_model, auth_token = account_management_service.create_account(
-                request,
                 sanitized_username,
                 sanitized_email_address,
                 unsafe_password,

@@ -60,7 +60,7 @@ def update_or_create_email_address(user_model, nfc_email_address, nfkc_email_add
         User.objects.filter(nfkc_primary_email_address=nfkc_email_address).exclude(id=user_model.id).delete()
 
 
-def create_account(request, sanitized_username, sanitized_email_address, unsafe_password, sanitized_terms_of_service_accepted):
+def create_account(sanitized_username, sanitized_email_address, unsafe_password, sanitized_terms_of_service_accepted):
     fields_to_validate_dict = {
         "username": sanitized_username,
         "email_address": sanitized_email_address,
