@@ -10,20 +10,20 @@ from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 
 
 class BurstRateThrottle(UserRateThrottle):
-    scope = 'burst'
+    scope = "burst"
 
 
 class SustainedRateThrottle(UserRateThrottle):
-    scope = 'sustained'
+    scope = "sustained"
 
 
 class HighAnonThrottle(AnonRateThrottle):
-    rate = '5000000/day'
+    rate = "5000000/day"
 
 
 class AccountCreation(permissions.BasePermission):
-    """   A user should be able to create an account without being authenticated, but only the
-          owner of an account should be able to access that account's data in a GET method.
+    """A user should be able to create an account without being authenticated, but only the
+    owner of an account should be able to access that account's data in a GET method.
     """
 
     def has_permission(self, request, view):

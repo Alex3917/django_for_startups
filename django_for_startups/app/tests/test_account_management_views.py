@@ -35,7 +35,7 @@ class UserTestCase(TestCase):
             resp = self.view(request)
 
         self.assertEqual(201, resp.status_code)
-        self.assertIn("auth_token", resp.data['data'])
+        self.assertIn("auth_token", resp.data["data"])
 
         self.assertEqual(1, User.objects.count())
         self.assertEqual(1, EmailAddress.objects.count())
@@ -202,7 +202,9 @@ class UserTestCase(TestCase):
         self.assertEqual(0, EmailAddress.objects.count())
 
     def test_user_cannot_create_an_account_with_a_username_thats_already_taken(self):
-        UserFactory(username="aoeu", email_address="example@example.com", password="hunter2!")
+        UserFactory(
+            username="aoeu", email_address="example@example.com", password="hunter2!"
+        )
 
         post_request_data = {
             "username": "aoeu",
@@ -228,8 +230,12 @@ class UserTestCase(TestCase):
         self.assertEqual(1, User.objects.count())
         self.assertEqual(1, EmailAddress.objects.count())
 
-    def test_accounts_with_unverified_primary_email_addresses_get_clobbered_by_new_signups(self):
-        UserFactory(username="aoeu", email_address="example@example.com", password="hunter2!")
+    def test_accounts_with_unverified_primary_email_addresses_get_clobbered_by_new_signups(
+        self,
+    ):
+        UserFactory(
+            username="aoeu", email_address="example@example.com", password="hunter2!"
+        )
 
         # Same email address
         post_request_data = {
@@ -299,16 +305,16 @@ class UserTestCase(TestCase):
         self.assertEqual(200, resp.status_code)
 
         expected_resp = {
-            'data': {
-                'user_profile': {
-                    'nfc_name': '',
-                    'nfc_username': 'Aoeu',
-                    'nfkc_name': '',
-                    'nfkc_primary_email_address': 'example@example.com',
-                    'nfkc_username': 'aoeu'
+            "data": {
+                "user_profile": {
+                    "nfc_name": "",
+                    "nfc_username": "Aoeu",
+                    "nfkc_name": "",
+                    "nfkc_primary_email_address": "example@example.com",
+                    "nfkc_username": "aoeu",
                 }
             }
         }
 
-        resp.data['data']['user_profile'].pop('date_joined')
+        resp.data["data"]["user_profile"].pop("date_joined")
         self.assertEqual(expected_resp, resp.data)

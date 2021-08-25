@@ -18,7 +18,9 @@ class UserFactory(DjangoModelFactory):
         password = kwargs.pop("password", "1234567a")
         terms_of_service_accepted = kwargs.pop("terms_of_service_accepted", True)
 
-        user_model, _ = account_management_service.create_account(username, email_address, password, terms_of_service_accepted)
+        user_model, _ = account_management_service.create_account(
+            username, email_address, password, terms_of_service_accepted
+        )
 
         if kwargs:
             for kwarg, value in kwargs.items():

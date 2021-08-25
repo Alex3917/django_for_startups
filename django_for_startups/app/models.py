@@ -2,7 +2,11 @@
 
 # Core Django imports
 from django.db import models
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import (
+    BaseUserManager,
+    AbstractBaseUser,
+    PermissionsMixin,
+)
 from django.conf import settings
 from django.utils import timezone
 from django.db import transaction
@@ -13,24 +17,38 @@ from django.db import transaction
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, nfkc_username, nfc_username, nfkc_primary_email_address, password=None):
+    def create_user(
+        self, nfkc_username, nfc_username, nfkc_primary_email_address, password=None
+    ):
         """If you don't verify your primary email address, your account will get deleted
         if another user attempts to create an account with that email address."""
-        existing_user_with_email = User.objects.select_for_update().filter(nfkc_primary_email_address=nfkc_primary_email_address)
-        is_verified_email = EmailAddress.objects.filter(nfkc_email_address=nfkc_primary_email_address, is_verified=True).exists()
+        existing_user_with_email = User.objects.select_for_update().filter(
+            nfkc_primary_email_address=nfkc_primary_email_address
+        )
+        is_verified_email = EmailAddress.objects.filter(
+            nfkc_email_address=nfkc_primary_email_address, is_verified=True
+        ).exists()
 
         if existing_user_with_email and not is_verified_email:
             existing_user_with_email.delete()
 
-        user_model = self.model(nfc_username=nfc_username, nfkc_username=nfkc_username, nfkc_primary_email_address=nfkc_primary_email_address)
+        user_model = self.model(
+            nfc_username=nfc_username,
+            nfkc_username=nfkc_username,
+            nfkc_primary_email_address=nfkc_primary_email_address,
+        )
         user_model.set_password(password)
 
         return user_model
 
-    def create_superuser(self, nfkc_username, nfkc_primary_email_address, password=None):
+    def create_superuser(
+        self, nfkc_username, nfkc_primary_email_address, password=None
+    ):
         with transaction.atomic():
             nfc_username = nfkc_username
-            user_model = self.create_user(nfkc_username, nfc_username, nfkc_primary_email_address, password)
+            user_model = self.create_user(
+                nfkc_username, nfc_username, nfkc_primary_email_address, password
+            )
             user_model.is_admin = True
             user_model.is_staff = True
             user_model.save()
@@ -38,7 +56,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    """ Stored casefolded, to prevent multiple users from having the same name username with different capitalization. """
+    """Stored casefolded, to prevent multiple users from having the same name username with different capitalization."""
 
     nfkc_username = models.CharField(max_length=15, unique=True)
     nfc_username = models.CharField(max_length=15)
@@ -88,6 +106,4 @@ class EmailAddress(models.Model):
         return str(self.nfc_email_address)
 
     class Meta:
-        unique_together = (
-            ("user_model", "is_primary"),
-        )
+        unique_together = (("user_model", "is_primary"),)
