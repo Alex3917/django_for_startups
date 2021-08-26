@@ -273,7 +273,6 @@ class UserTestCase(TestCase):
         self.assertEqual(201, resp.status_code)
 
         # Next GET the user's profile
-        user_model = User.objects.all()[0]
         request2 = self.factory.get("/user")
         with self.assertNumQueries(0):
             resp = self.view(request2)
