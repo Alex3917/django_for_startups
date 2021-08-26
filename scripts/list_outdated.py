@@ -4,7 +4,6 @@ import subprocess  # nosec
 RSTRIP_ROOT_DEPENDENCIES = re.compile(r"(#.*|=.*)")
 RSTRIP_OUTDATED_PACKAGES = re.compile(r"\s.*")
 
-
 with open("requirements.in") as f:
     possible_root_dependencies_list = f.read().splitlines()
 
