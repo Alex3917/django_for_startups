@@ -12,7 +12,7 @@ def strip_xss(text):
     """Remove all markup from text."""
 
     allowed_tags = []
-    allowed_attributes = []
+    allowed_attributes = {}
     allowed_styles = []
 
     text = bleach.clean(
