@@ -15,8 +15,9 @@ from app.views import account_management_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-
-    path('api-token-auth/', obtain_jwt_token, name="auth"),
-    
-    path("account_management/user", account_management_views.User.as_view(),),
+    path("api-token-auth/", obtain_jwt_token, name="auth"),
+    path(
+        "account_management/user",
+        account_management_views.User.as_view(),
+    ),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

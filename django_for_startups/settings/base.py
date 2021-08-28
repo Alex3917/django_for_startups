@@ -50,12 +50,14 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASS": ("rest_framework.permissions.IsAuthenticated",),
-    'DEFAULT_AUTHENTICATION_CLASSES': ( 'django_customizations.drf_jwt_customizations.CustomJSONWebTokenAuthentication',),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "django_customizations.drf_jwt_customizations.CustomJSONWebTokenAuthentication",
+    ),
     "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
     "DEFAULT_THROTTLE_CLASSES": (
         "rest_framework.throttling.AnonRateThrottle",
-        'django_customizations.drf_customizations.BurstRateThrottle',
-        'django_customizations.drf_customizations.SustainedRateThrottle',
+        "django_customizations.drf_customizations.BurstRateThrottle",
+        "django_customizations.drf_customizations.SustainedRateThrottle",
     ),
     "DEFAULT_THROTTLE_RATES": {
         "anon": "5000/day",
@@ -65,7 +67,9 @@ REST_FRAMEWORK = {
     "TEST_REQUEST_DEFAULT_FORMAT": "json",
 }
 
-AUTHENTICATION_BACKENDS = ('django_customizations.core_django_customizations.CaseInsensitiveUserAuth',)
+AUTHENTICATION_BACKENDS = (
+    "django_customizations.core_django_customizations.CaseInsensitiveUserAuth",
+)
 
 
 ROOT_URLCONF = "urls"
@@ -106,7 +110,7 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 # Must be changed for NGINX or Apache in production, c.f.
 # http://stackoverflow.com/questions/7620307/how-do-i-serve-css-to-django-in-development
@@ -159,5 +163,5 @@ JWT_AUTH = {
     "JWT_EXPIRATION_DELTA": datetime.timedelta(days=90),
     "JWT_ALLOW_REFRESH": True,
     "JWT_REFRESH_EXPIRATION_DELTA": datetime.timedelta(days=365),
-    'JWT_PAYLOAD_HANDLER': 'django_customizations.drf_jwt_customizations.jwt_custom_payload_handler',
+    "JWT_PAYLOAD_HANDLER": "django_customizations.drf_jwt_customizations.jwt_custom_payload_handler",
 }
