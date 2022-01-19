@@ -1,5 +1,5 @@
 # django_for_startups
-Code for the book Django for Startups
+Code for the book [Django for Startups](https://alexkrupp.typepad.com/sensemaking/2021/06/django-for-startup-founders-a-better-software-architecture-for-saas-startups-and-consumer-apps.html)
 
 ## Instructions for running locally on MacOS with Python 3.8:
 
