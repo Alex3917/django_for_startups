@@ -1,32 +1,32 @@
 # See outdated root requirements: `. bin/activate && python scripts/list_outdated.py`
 # Install all of the requirements in this file: `. bin/activate && pip-compile --output-file requirements.txt requirements.in && pip install -r requirements.txt`
 
-django==4.0.1
-djangorestframework==3.13.1
+django==4.1.6
+djangorestframework==3.14.0
 drf-jwt==1.19.2
 django-redis==5.2.0
-django-cors-headers==3.11.0
-django-extensions==3.1.5
+django-cors-headers==3.13.0
+django-extensions==3.2.1
 
-pip-tools==6.4.0
-psycopg2-binary==2.9.3
+pip-tools==6.12.2
+psycopg2-binary==2.9.5
 argon2-cffi==21.3.0
-pytz==2021.3
-redis==4.1.1
-bleach==4.1.0
-marshmallow==3.14.1
+pytz==2022.7.1
+redis==4.5.1
+bleach==6.0.0
+marshmallow==3.19.0
 factory-boy==3.2.1
 
 # Dev dependencies
 tblib==1.7.0
-black==20.8b1
-flake8==4.0.1
+black==23.1.0
+flake8==6.0.0
 
 # Flake8 plugins. C.f. https://github.com/DmytroLitvinov/awesome-flake8-extensions for additional possibilities.
-flake8-blind-except==0.2.0 # Don't allow catch-all exceptions
-flake8-builtins==1.5.3 # Don't allow shadowing built-ins
+flake8-blind-except==0.2.1 # Don't allow catch-all exceptions
+flake8-builtins==2.1.0 # Don't allow shadowing built-ins
 flake8-commas==2.1.0 # Require trailing commas
-flake8-debugger==4.0.0 # Don't allow debugger statements
+flake8-debugger==4.1.2 # Don't allow debugger statements
 flake8-mutable==1.2.0 # Don't allow mutable default arguments
 flake8-tuple==0.4.1 # Require paretheses around tuples
-pep8-naming==0.12.1 # Flake8 plugin. Require variable names to adhere to PEP 8.
+pep8-naming==0.13.3 # Flake8 plugin. Require variable names to adhere to PEP 8.
