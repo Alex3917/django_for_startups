@@ -32,7 +32,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_extensions",
     "rest_framework",
-    "rest_framework_jwt",
     "app",
 ]
 
@@ -155,9 +154,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-JWT_AUTH = {
-    "JWT_EXPIRATION_DELTA": datetime.timedelta(days=90),
-    "JWT_ALLOW_REFRESH": True,
-    "JWT_REFRESH_EXPIRATION_DELTA": datetime.timedelta(days=365),
-    'JWT_PAYLOAD_HANDLER': 'django_customizations.drf_jwt_customizations.jwt_custom_payload_handler',
-}
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=90),
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=365),
+    'USER_ID_FIELD': 'nfkc_username',
+    'USER_ID_CLAIM': 'username',
+    'AUTH_HEADER_TYPES': 'JWT',
+    'ALGORITHM': 'HS256'
+ }

@@ -5,6 +5,7 @@ from rest_framework.response import Response
 
 # Third-party imports
 from rest_framework.views import APIView
+from rest_framework_simplejwt.views import TokenObtainPairView
 import marshmallow
 
 # App imports
@@ -13,6 +14,7 @@ from utils.error_utils import get_validation_error_response, get_business_requir
 from app.services import account_management_service
 from errors import custom_errors
 from django_customizations.drf_customizations import AccountCreation
+from django_customizations.drf_jwt_customizations import CustomTokenObtainPairSerializer
 
 
 class User(APIView):
@@ -54,3 +56,7 @@ class User(APIView):
 
         resp = { "data": { "user_profile": user_profile_dict }}
         return Response(data=resp, status=200)
+
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
